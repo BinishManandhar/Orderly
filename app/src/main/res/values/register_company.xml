@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="businesstype">
+        <item>Tailoring</item>
+        <item>Boutique</item>
+        <item>Furniture</item>
+        <item>Maintenance Workshop</item>
+        <item>Clothing</item>
+        <item>Food</item>
+    </string-array>
+</resources>

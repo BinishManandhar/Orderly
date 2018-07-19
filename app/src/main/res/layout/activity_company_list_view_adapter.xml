@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CompanyListViewAdapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/background">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Tag"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/drawer"
+                android:layout_marginLeft="25dp"
+                android:layout_alignBaseline="@id/search"
+                android:hint="Search...."
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_search_white_24dp"
+                android:layout_alignParentRight="true"
+                android:paddingRight="8dp"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/displaylist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
