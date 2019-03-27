@@ -1,27 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainlinear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="end">
-
-            <LinearLayout
+            <com.chauthai.swipereveallayout.SwipeRevealLayout
+                android:id="@+id/swipe_layout_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                app:dragEdge="left"
+                app:mode="same_level"
+                app:flingVelocity="30"
+                app:minDistRequestDisallowParent="-15dp"
+                >
+
+                <LinearLayout
+                    android:id="@+id/delete_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/company_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_delete_red_24dp"
+                        />
+                    <ImageView
+                        android:id="@+id/company_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="20dp"
+                        android:src="@drawable/ic_update_blue_24dp"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_layout_1"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
+
                     android:orientation="vertical">
 
 
@@ -94,8 +125,8 @@
                                 android:id="@+id/orderidfield"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
                                 android:text="Field1"
                                 android:textColor="#000" />
 
@@ -133,160 +164,159 @@
                             android:background="@color/textColorBlack"/>-->
                     </TableLayout>
                 </LinearLayout>
+            </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
-                <RelativeLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:visibility="visible">
 
                     <LinearLayout
-                        android:id="@+id/linear_layout_2"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/background"
-                        android:visibility="visible">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_days"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:text="00"
-                                android:textColor="@android:color/white"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_days_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:text="Days"
-                                android:textColor="@android:color/white"
-                                android:textSize="17sp"
-                                android:textStyle="normal" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_hour"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:text="00"
-                                android:textColor="@android:color/white"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_hour_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="5dp"
-                                android:text="Hours"
-                                android:textColor="@android:color/white"
-                                android:textSize="17sp"
-                                android:textStyle="normal" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tv_days"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
+                            android:padding="5dp"
+                            android:text="00"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/tv_minute"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="3dp"
-                                android:text="00"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_minute_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="3dp"
-                                android:text="Minutes"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp"
-                                android:textStyle="normal" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tv_days_title"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_second"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="3dp"
-                                android:text="00"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_second_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:padding="3dp"
-                                android:text="Seconds"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp"
-                                android:textStyle="normal" />
-                        </LinearLayout>
+                            android:padding="5dp"
+                            android:text="Days"
+                            android:textColor="@android:color/white"
+                            android:textSize="17sp"
+                            android:textStyle="normal" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/finished"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Finished!"
-                        android:textColor="@color/textColor"
-                        android:textSize="28sp"
-                        android:visibility="invisible" />
-                </RelativeLayout>
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/textColorBlack" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_hour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            android:text="00"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-            <!--<Button
-                android:id="@+id/deletebttn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_selector"
-                android:text="Delete!"
-                android:textColor="@color/textColor" />-->
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_hour_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            android:text="Hours"
+                            android:textColor="@android:color/white"
+                            android:textSize="17sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_minute"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:text="00"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_minute_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:text="Minutes"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:text="00"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_second_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:text="Seconds"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Finished!"
+                    android:textColor="@color/textColor"
+                    android:textSize="28sp"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/textColorBlack" />
+
+        <!--<Button
+            android:id="@+id/deletebttn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_selector"
+            android:text="Delete!"
+            android:textColor="@color/textColor" />-->
 </LinearLayout>

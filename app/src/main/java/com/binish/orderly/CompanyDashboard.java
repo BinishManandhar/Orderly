@@ -1,21 +1,17 @@
 package com.binish.orderly;
 
-import android.graphics.Color;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.security.PublicKey;
+import com.binish.orderly.Fragments.CheckOrderFragment;
+import com.binish.orderly.Fragments.NewCheckOrderFragment;
+import com.binish.orderly.Fragments.PlaceOrderFragment;
 
 public class CompanyDashboard extends AppCompatActivity {
     ViewPager pager;
@@ -84,7 +80,7 @@ public class CompanyDashboard extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0)
-                return new CheckOrderFragment();
+                return new NewCheckOrderFragment();
             else {
                 return new PlaceOrderFragment();
             }

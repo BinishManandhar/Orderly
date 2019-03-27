@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".customers_list" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Views.HomePage" />
+        <activity android:name=".Activities.customers_list" />
         <activity android:name=".ProfileLayout" />
-        <activity android:name=".UpdateCustomerActivity" />
-        <activity android:name=".ProfileDetail" />
-        <activity android:name=".RegisterCompanyActivity" />
-        <activity android:name=".CompanyListViewAdapter" />
-        <activity android:name=".UpdateCompanyActivity" />
-        <activity android:name=".CompanyProfileDetail" />
-        <activity android:name=".ServiceTypesAdapter" />
+        <activity android:name=".Activities.UpdateCustomerActivity" />
+        <activity android:name=".Activities.ProfileDetail" />
+        <activity android:name=".Activities.RegisterCompanyActivity" />
+        <activity android:name=".Adapters.CompanyListViewAdapter" />
+        <activity android:name=".Activities.UpdateCompanyActivity" />
+        <activity android:name=".Activities.CompanyProfileDetail" />
+        <activity android:name=".Adapters.ServiceTypesAdapter" />
         <!-- <activity android:name=".test" /> -->
         <activity android:name=".order_place" />
         <activity
@@ -32,17 +32,17 @@
             android:label="@string/title_activity_company_dashboard"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".CompanyNavigation"
+            android:name=".Navigations.CompanyNavigation"
             android:label="@string/title_activity_company_navigation"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".CustomerNavigation"
+            android:name=".Navigations.CustomerNavigation"
             android:label="@string/title_activity_customer_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".OrderListViewAdapter" />
-        <activity android:name=".CountDownTimerView" />
-        <activity android:name=".CustomerProfileDetail" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".Adapters.OrderListViewAdapter" />
+        <activity android:name=".Views.CountDownTimerView" />
+        <activity android:name=".Activities.CustomerProfileDetail" />
+        <activity android:name=".Utilities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,12 +62,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
 
-        <receiver android:name=".Receiver"></receiver>
+        <receiver android:name=".Notification.Receiver"></receiver>
 
-        <activity android:name=".NotificationAlarmActivity"></activity>
+        <activity android:name=".Activities.NotificationAlarmActivity"></activity>
     </application>
 
 </manifest>

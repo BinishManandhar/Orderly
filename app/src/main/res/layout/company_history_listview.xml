@@ -1,212 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-    <LinearLayout
-        android:id="@+id/linear_layout_1"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        app:dragEdge="right"
+        app:mode="same_level">
 
+        <LinearLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-        <!--
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:text="Order Details"
-                        android:gravity="center"/>
-        -->
-
-        <TableLayout
-            android:id="@+id/table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:showDividers="end">
-
-
-            <TableRow
-                android:id="@+id/tabletitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-
-                <TextView
-                    android:id="@+id/orderid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Order ID"
-                    android:textColor="#000"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/orderitem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Order Item"
-                    android:textColor="#000"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/customername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Customers Name"
-                    android:textColor="#000"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/contactno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Contact No."
-                    android:textColor="#000"
-                    android:textStyle="bold" />
-
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textColorBlack" />
-
-            <TableRow
-                android:id="@+id/tabletitlefield"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
-
-
-                <TextView
-                    android:id="@+id/orderidfield"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Field1"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/orderitemfield"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Field2"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/customernamefield"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Field3"
-                    android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/contactnofield"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Field4"
-                    android:textColor="#000" />
-
-            </TableRow>
-            <!--<View
-                android:layout_height="1dp"
-                android:layout_width="match_parent"
-                android:background="@color/textColorBlack"/>-->
-        </TableLayout>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/history_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_delete_red_24dp" />
+        </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/linear_layout_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:visibility="visible">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/linear_layout_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/orderdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:text="Ordered Date: "
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:textStyle="normal" />
 
-                <TextView
-                    android:id="@+id/field1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                <!--
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:text="Order Details"
+                                android:gravity="center"/>
+                -->
 
+                <TableLayout
+                    android:id="@+id/table_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:showDividers="end">
+
+
+                    <TableRow
+                        android:id="@+id/tabletitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+
+                        <TextView
+                            android:id="@+id/orderid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Order ID"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/orderitem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Order Item"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/customername"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Customers Name"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/contactno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Contact No."
+                            android:textColor="#000"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/textColorBlack" />
+
+                    <TableRow
+                        android:id="@+id/tabletitlefield"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+
+                        <TextView
+                            android:id="@+id/orderidfield"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Field1"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/orderitemfield"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Field2"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/customernamefield"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Field3"
+                            android:textColor="#000" />
+
+                        <TextView
+                            android:id="@+id/contactnofield"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Field4"
+                            android:textColor="#000" />
+
+                    </TableRow>
+                    <!--<View
+                        android:layout_height="1dp"
+                        android:layout_width="match_parent"
+                        android:background="@color/textColorBlack"/>-->
+                </TableLayout>
             </LinearLayout>
+        </LinearLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+    <LinearLayout
+        android:id="@+id/linear_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:visibility="visible">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/orderdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Ordered Date: "
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-                <TextView
-                    android:id="@+id/finishdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:text="Finished Date"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/field2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/field3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="hh:mm"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@color/textColor"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/field1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="00"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/finishdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Finished Date"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/field2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="00"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/field3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="hh:mm"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
