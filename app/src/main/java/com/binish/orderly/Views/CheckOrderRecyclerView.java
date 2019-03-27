@@ -34,6 +34,7 @@ import com.binish.orderly.Models.CompanyInfo;
 import com.binish.orderly.Models.CustomersInfo;
 import com.binish.orderly.Models.OrderInfo;
 import com.binish.orderly.Navigations.CompanyNavigation;
+import com.binish.orderly.Notification.SetAlarm;
 import com.binish.orderly.R;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
@@ -136,23 +137,28 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
             new CountDownTimer(finaltime.get(position) - System.currentTimeMillis(), 1000) {
                 @Override
                 public void onTick(long l) {
-                    long Days = (finaltime.get(position) - System.currentTimeMillis()) / (24 * 60 * 60 * 1000);
-                    long Hours = (finaltime.get(position) - System.currentTimeMillis()) / (60 * 60 * 1000) % 24;
-                    long Minutes = (finaltime.get(position) - System.currentTimeMillis()) / (60 * 1000) % 60;
-                    long Seconds = (finaltime.get(position) - System.currentTimeMillis()) / 1000 % 60;
+                    try {
+                        long Days = (finaltime.get(position) - System.currentTimeMillis()) / (24 * 60 * 60 * 1000);
+                        long Hours = (finaltime.get(position) - System.currentTimeMillis()) / (60 * 60 * 1000) % 24;
+                        long Minutes = (finaltime.get(position) - System.currentTimeMillis()) / (60 * 1000) % 60;
+                        long Seconds = (finaltime.get(position) - System.currentTimeMillis()) / 1000 % 60;
 
-                    holder.tv_days.setText(String.format(Locale.US, "%02d", Days));
-                    if (Days < 2)
-                        holder.tv_days_title.setText("Day");
-                    holder.tv_hour.setText(String.format(Locale.US, "%02d", Hours));
-                    if (Hours < 2)
-                        holder.tv_hour_title.setText("Hour");
-                    holder.tv_minute.setText(String.format(Locale.US, "%02d", Minutes));
-                    if (Minutes < 2)
-                        holder.tv_minute_title.setText("Minute");
-                    holder.tv_second.setText(String.format(Locale.US, "%02d", Seconds));
-                    if (Seconds < 2)
-                        holder.tv_second_title.setText("Second");
+                        holder.tv_days.setText(String.format(Locale.US, "%02d", Days));
+                        if (Days < 2)
+                            holder.tv_days_title.setText("Day");
+                        holder.tv_hour.setText(String.format(Locale.US, "%02d", Hours));
+                        if (Hours < 2)
+                            holder.tv_hour_title.setText("Hour");
+                        holder.tv_minute.setText(String.format(Locale.US, "%02d", Minutes));
+                        if (Minutes < 2)
+                            holder.tv_minute_title.setText("Minute");
+                        holder.tv_second.setText(String.format(Locale.US, "%02d", Seconds));
+                        if (Seconds < 2)
+                            holder.tv_second_title.setText("Second");
+                    }
+                    catch (IndexOutOfBoundsException e){
+                        this.cancel();
+                    }
                 }
 
                 @Override
@@ -240,6 +246,8 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             deleteProfile(holder.getAdapterPosition());
+                            extrainfolist.remove(position);
+                            notifyItemRemoved(position);
                         }
                     });
                     builder.show();
@@ -297,7 +305,7 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
 
 
         final OrderInfo updateInfo = extraorderinfo.get(position);
-        CustomersInfo updateCustomer = extrainfolist.get(position);
+        final CustomersInfo updateCustomer = extrainfolist.get(position);
         orderitem.setText(updateInfo.getOrderitem());
         username.setText(updateCustomer.getUsername());
         orderdate.setText(updateInfo.getOrderdate());
@@ -347,6 +355,9 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
                     Toast.makeText(context, "Order Placed for " + orderdate.getText().toString(), Toast.LENGTH_LONG).show();
 //                    setUserVisibleHint(true);
                     dialog.dismiss();
+                    SetAlarm setAlarm = new SetAlarm(context,updateInfo.getCompanyId(),updateCustomer.getCustomerid());
+                    setAlarm.setAlarm();
+                    setAlarm.setAlarmForCustomer();
                     Intent intent = new Intent(context,CompanyNavigation.class);
                     intent.putExtra("username",emailid);
                     context.startActivity(intent);

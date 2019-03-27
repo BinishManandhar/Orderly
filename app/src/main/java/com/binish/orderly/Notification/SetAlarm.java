@@ -42,11 +42,11 @@ public class SetAlarm {
         //notificationIntent.putExtra("emailid",companyid);
         notificationIntent.putExtra("origin",0);
         notificationIntent.putExtra("orderid",orderid);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 4, notificationIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 4, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
 
-        Log.i("notification","Set Alarm Order ID: "+orderid);
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
         Date event_date = null;
@@ -85,6 +85,7 @@ public class SetAlarm {
                 break;
         }
 
+        Log.i("notification","Notification Time: "+notificationTime);
         manager.set(AlarmManager.RTC_WAKEUP,notificationTime,pendingIntent);
 
     }

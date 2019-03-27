@@ -1,11 +1,16 @@
 package com.binish.orderly.Notification;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -34,7 +39,19 @@ public class Receiver extends BroadcastReceiver {
         databaseHelperOrder = new DatabaseHelperOrder(context);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         Intent notificationIntent = new Intent(context, LoginActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 4, notificationIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 4, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            long[] pattern = {0, 100, 1000};
+            NotificationChannel channel = new NotificationChannel("orderly","Orderly",NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI,
+                    new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+                            .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT).build());
+            channel.setLightColor(Color.argb(255,79,65,226));
+            channel.setVibrationPattern(pattern);
+            notificationManager.createNotificationChannel(channel);
+        }
 
         OrderInfo fullinfo = databaseHelperOrder.forProfileDetail(orderid);
         Log.i("notification","fullinfo: "+fullinfo.getOrderitem());
@@ -97,20 +114,45 @@ public class Receiver extends BroadcastReceiver {
 
         Notification notification = new Notification();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        Notification.Builder notificationBuilder = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            notificationBuilder = new Notification.Builder(context,"orderly");
+        }
+        else {
+            notificationBuilder = new Notification.Builder(context);
+        }
+        notificationBuilder.setContentTitle("Reminder for your Order");
+        notificationBuilder.setContentIntent(pendingIntent);
+        notificationBuilder.setContentText(fullinfo.getOrderitem()+" should be ready in "+remindbefore);
+        notificationBuilder.setTicker("ticker");
+        notificationBuilder.setSmallIcon(R.drawable.ic_av_timer_black_24dp);
+
+
+        notification = notificationBuilder.build();
+
+
+        notificationManager.notify(1010,notification);
+
+        /*NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         notification = builder.setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_av_timer_black_24dp)
                 .setTicker("ticker").setWhen(System.currentTimeMillis())
                 .setAutoCancel(true).setContentTitle("Reminder for your Order")
                 .setContentText(fullinfo.getOrderitem()+" should be ready in "+remindbefore).build();
 
-        notificationManager.notify(1010, notification);
+        notificationManager.notify(1010, notification);*/
 
         Notification notification1 = new Notification();
         Intent notificationIntent1 = new Intent(context, LoginActivity.class);
         PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 5, notificationIntent1, PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationCompat.Builder builder1 = new NotificationCompat.Builder(context);
+        Notification.Builder builder1 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            builder1 = new Notification.Builder(context,"orderly");
+        }
+        else {
+            builder1 = new Notification.Builder(context);
+        }
         notification1 = builder1.setContentIntent(pendingIntent1)
                 .setSmallIcon(R.drawable.ic_av_timer_black_24dp)
                 .setTicker("ticker").setWhen(System.currentTimeMillis())
