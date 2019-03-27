@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.binish.orderly.Database.DatabaseHelperOrder;
-import com.binish.orderly.Fragments.CheckOrderFragment;
 import com.binish.orderly.Models.OrderInfo;
 import com.binish.orderly.R;
 import com.binish.orderly.Notification.Receiver;
@@ -56,7 +55,7 @@ public class NotificationAlarmActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.US);
         Date event_date = null;
         //Date current_date = new Date();
-        CheckOrderFragment.RowData eventdate = null;
+        long eventdate = 0;
         try {
             event_date = dateFormat.parse(info.getFinishdate() + " " + info.getFinishtime());
             finishTime = event_date.getTime();

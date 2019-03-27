@@ -29,7 +29,6 @@ import com.binish.orderly.Activities.CustomerProfileDetail;
 import com.binish.orderly.Database.DatabaseHelper;
 import com.binish.orderly.Database.DatabaseHelperCompany;
 import com.binish.orderly.Database.DatabaseHelperOrder;
-import com.binish.orderly.Fragments.CheckOrderFragment;
 import com.binish.orderly.Models.CompanyInfo;
 import com.binish.orderly.Models.CustomersInfo;
 import com.binish.orderly.Models.OrderInfo;
@@ -85,7 +84,7 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
 
     }
 
-    public void generateData() {
+    private void generateData() {
         extrainfolist = new ArrayList<>();
         extraorderinfo = new ArrayList<>();
         ArrayList<OrderInfo> list = databaseHelperOrder.getParticularOrderTable(companyInfo.getCompanyid());//databasehelper use garera taaney data
@@ -271,6 +270,7 @@ public class CheckOrderRecyclerView extends RecyclerView.Adapter<ViewHolder> {
         Intent intent = new Intent(context, CustomerProfileDetail.class);
         //Log.i("tag","CheckOrderFragment: "+getArguments().getString("emailid"));
         intent.putExtra("emailid", emailid);
+        intent.putExtra("origin", "0");
         OrderInfo newInfo = extraorderinfo.get(position);
         intent.putExtra("orderid", String.valueOf(newInfo.getOrderid()));
         intent.putExtra("orderitem", newInfo.getOrderitem());

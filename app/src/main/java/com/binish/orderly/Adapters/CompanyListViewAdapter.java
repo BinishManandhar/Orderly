@@ -1,10 +1,18 @@
 package com.binish.orderly.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -14,14 +22,16 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.binish.orderly.Activities.CompanyProfileDetail;
 import com.binish.orderly.Models.CompanyInfo;
 import com.binish.orderly.Database.DatabaseHelperCompany;
 import com.binish.orderly.R;
+import com.binish.orderly.Utilities.ImageConversion;
 
 import java.util.ArrayList;
 
 public class CompanyListViewAdapter extends AppCompatActivity {
-    ListView displaylist;
+    RecyclerView displaylist;
     DatabaseHelperCompany databaseHelperCompany;
     TextView tag;
     ImageView search, back;
@@ -36,7 +46,7 @@ public class CompanyListViewAdapter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_list_view_adapter);
-        displaylist = findViewById(R.id.displaylist);
+        displaylist = findViewById(R.id.displaylistRecycler);
         tag = findViewById(R.id.tag);
         search = findViewById(R.id.search);
         searchbar = findViewById(R.id.searchbar);
@@ -49,12 +59,16 @@ public class CompanyListViewAdapter extends AppCompatActivity {
 
         businesstype = getIntent().getStringExtra("businesstype");
         tag.setText(businesstype);
-        displaylist.setAdapter(new CompanyListAdapter(this, databaseHelperCompany.getServiceCompany(businesstype)));
+
+        displaylist.setLayoutManager(new LinearLayoutManager(CompanyListViewAdapter.this));
+        displaylist.setItemAnimator(new DefaultItemAnimator());
+
+        displaylist.setAdapter(new CompanyListViewRecycler(this, databaseHelperCompany.getServiceCompany(businesstype)));
+
         oldparams = (RelativeLayout.LayoutParams) search.getLayoutParams();
 
         translate = AnimationUtils.loadAnimation(this, R.anim.translate);
         translateback = AnimationUtils.loadAnimation(this, R.anim.translateback);
-
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +108,7 @@ public class CompanyListViewAdapter extends AppCompatActivity {
                                 case KeyEvent.KEYCODE_DPAD_CENTER:
                                 case KeyEvent.KEYCODE_ENTER:
                                     list = databaseHelperCompany.getBusinessTypeSearch(searchbar.getText().toString(),getIntent().getStringExtra("businesstype"));
-                                    displaylist.setAdapter(new CompanyListAdapter(CompanyListViewAdapter.this, list));
+                                    displaylist.setAdapter(new CompanyListViewRecycler(CompanyListViewAdapter.this, list));
                                     Log.i("enter","Inside Enter");
                                     return true;
                                 default:
@@ -158,7 +172,8 @@ public class CompanyListViewAdapter extends AppCompatActivity {
                     back.setVisibility(View.VISIBLE);
                     tag.setVisibility(View.VISIBLE);
                     search.setEnabled(true);
-                    displaylist.setAdapter(new CompanyListAdapter(CompanyListViewAdapter.this, databaseHelperCompany.getServiceCompany(businesstype)));
+
+                    displaylist.setAdapter(new CompanyListViewRecycler(CompanyListViewAdapter.this, databaseHelperCompany.getServiceCompany(businesstype)));
 
                 }
 
@@ -172,3 +187,5 @@ public class CompanyListViewAdapter extends AppCompatActivity {
         }
     }
 }
+
+

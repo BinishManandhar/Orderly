@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.binish.orderly.Adapters.CompanyListAdapter;
 import com.binish.orderly.Database.DatabaseHelperCompany;
 import com.binish.orderly.R;
 
@@ -52,7 +51,7 @@ public class CompanyListViewFragment extends Fragment {
 
         String businesstype = getActivity().getIntent().getStringExtra("businesstype");
         tag.setText(businesstype);
-        displaylist.setAdapter(new CompanyListAdapter(getActivity(), databaseHelperCompany.getServiceCompany(businesstype)));
+//        displaylist.setAdapter(new CompanyListAdapter(getActivity(), databaseHelperCompany.getServiceCompany(businesstype)));
         oldparams = (RelativeLayout.LayoutParams) search.getLayoutParams();
 
         translate = AnimationUtils.loadAnimation(getActivity(), R.anim.translate);

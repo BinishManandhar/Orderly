@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.binish.orderly.Fragments.CheckOrderFragment;
 import com.binish.orderly.Fragments.NewCheckOrderFragment;
 import com.binish.orderly.Fragments.PlaceOrderFragment;
 

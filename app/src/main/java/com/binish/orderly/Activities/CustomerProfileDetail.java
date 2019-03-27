@@ -1,8 +1,11 @@
 package com.binish.orderly.Activities;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,17 +26,18 @@ import com.binish.orderly.R;
 import com.binish.orderly.Utilities.ImageConversion;
 
 public class CustomerProfileDetail extends AppCompatActivity {
+    LinearLayout remindBeforeLinear;
     ImageView updateimage;
     TextView profilename, profileemailid, profilecontactno, profilecustomerid, profilegender;
     TextView profileorderid, profileorderitem, profileorderdate, profilefinishdate;
     Spinner remindSpinner;
     Button updatebttn, profilecallbutton;
-    String emailid;
+    String emailid, origin;
     DatabaseHelper databaseHelper;
     CustomersInfo info;
     OrderInfo orderInfo;
     DatabaseHelperOrder databaseHelperOrder;
-    static int forspinner=0;
+    static int forspinner = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,14 @@ public class CustomerProfileDetail extends AppCompatActivity {
         databaseHelperOrder = new DatabaseHelperOrder(this);
 
         emailid = getIntent().getStringExtra("emailid");
+        origin = getIntent().getStringExtra("origin");
 
-        OrderInfo orderInfo= databaseHelperOrder.getCompanyId(emailid);
 
-        OrderInfo data = databaseHelperOrder.getOrderDetail(orderInfo.getCompanyId());
+        OrderInfo data = databaseHelperOrder.getOrderDetail(Integer.parseInt(getIntent().getStringExtra("orderid"))); //orderinfo.getCompanyId()
 
         info = databaseHelper.getEssentialInfo(data.getCustomerid());
 
+        remindBeforeLinear = findViewById(R.id.remindbeforeLinear);
         updateimage = findViewById(R.id.updateimage);
         profilename = findViewById(R.id.profilename);
         profileemailid = findViewById(R.id.profileemailid);
@@ -67,11 +73,25 @@ public class CustomerProfileDetail extends AppCompatActivity {
         //businessadapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         remindSpinner.setAdapter(remindbefore);
 
+        if (origin.equals("1")) {
+            remindBeforeLinear.setVisibility(View.GONE);
+        }
+
         profilecallbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callintent = new Intent(Intent.ACTION_CALL);
                 callintent.setData(Uri.parse("tel:" + info.getContactno()));
+                if (ActivityCompat.checkSelfPermission(CustomerProfileDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 startActivity(callintent);
             }
         });
@@ -126,16 +146,19 @@ public class CustomerProfileDetail extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-        DatabaseHelperOrder databaseHelperOrder = new DatabaseHelperOrder(CustomerProfileDetail.this);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("remindbefore",String.valueOf(remindSpinner.getSelectedItemPosition()));
-        databaseHelperOrder.updateOrderTable(contentValues,orderInfo.getOrderid());
-        forspinner = 1;
-        Intent intent = new Intent(this,CompanyNavigation.class);
-        intent.putExtra("username",emailid);
-        startActivity(intent);
-        finish();
+        if(origin.equals("1"))
+            super.onBackPressed();
+        else {
+            DatabaseHelperOrder databaseHelperOrder = new DatabaseHelperOrder(CustomerProfileDetail.this);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("remindbefore", String.valueOf(remindSpinner.getSelectedItemPosition()));
+            databaseHelperOrder.updateOrderTable(contentValues, orderInfo.getOrderid());
+            forspinner = 1;
+            Intent intent = new Intent(this, CompanyNavigation.class);
+            intent.putExtra("username", emailid);
+            startActivity(intent);
+            finish();
+        }
     }
 }
 

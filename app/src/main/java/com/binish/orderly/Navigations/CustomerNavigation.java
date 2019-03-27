@@ -2,6 +2,7 @@ package com.binish.orderly.Navigations;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +19,7 @@ import com.binish.orderly.Activities.LoginActivity;
 import com.binish.orderly.Activities.UpdateCustomerActivity;
 import com.binish.orderly.Database.DatabaseHelper;
 import com.binish.orderly.Fragments.CustomerHistoryFragment;
-import com.binish.orderly.Fragments.HomePageFragment;
+import com.binish.orderly.Fragments.NewHomePageFragment;
 import com.binish.orderly.Fragments.ServiceTypesFragment;
 import com.binish.orderly.Models.CustomersInfo;
 import com.binish.orderly.R;
@@ -51,7 +52,7 @@ public class CustomerNavigation extends AppCompatActivity
         usernameid = getIntent().getStringExtra("username");
 
         navigationView.getMenu().getItem(0).setChecked(true);
-        HomePageFragment homePageFragment = new HomePageFragment();
+        NewHomePageFragment homePageFragment = new NewHomePageFragment();
         Bundle bundle = new Bundle();
         bundle.putString("username",usernameid);
         homePageFragment.setArguments(bundle);
@@ -119,12 +120,12 @@ public class CustomerNavigation extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.checkstatus) {
-            HomePageFragment homePageFragment = new HomePageFragment();
+            NewHomePageFragment homePageFragment = new NewHomePageFragment();
             Bundle bundle = new Bundle();
             bundle.putString("username",usernameid);
             homePageFragment.setArguments(bundle);

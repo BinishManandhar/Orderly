@@ -1,10 +1,14 @@
 package com.binish.orderly.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,12 +19,12 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binish.orderly.Adapters.CategoriesAdapter;
-import com.binish.orderly.Adapters.CompanyListAdapter;
+import com.binish.orderly.Adapters.CompanyListViewAdapter;
+import com.binish.orderly.Adapters.CompanyListViewRecycler;
 import com.binish.orderly.Models.CompanyInfo;
 import com.binish.orderly.Navigations.CustomerNavigation;
 import com.binish.orderly.Database.DatabaseHelperCompany;
@@ -29,7 +33,7 @@ import com.binish.orderly.R;
 import java.util.ArrayList;
 
 public class ServiceTypesFragment extends Fragment {
-    ListView listView;
+    RecyclerView displaylist;
     ImageView search, drawer;
     DatabaseHelperCompany databaseHelperCompany;
     Animation translate, translateback;
@@ -52,7 +56,7 @@ public class ServiceTypesFragment extends Fragment {
         searchbar = view.findViewById(R.id.searchbar);
         searchbar.setVisibility(View.INVISIBLE);
         title = view.findViewById(R.id.explore);
-        listView = view.findViewById(R.id.displaylist);
+        displaylist = view.findViewById(R.id.displaylist);
         drawer = view.findViewById(R.id.drawer);
         translate = AnimationUtils.loadAnimation(getActivity(), R.anim.translate);
         databaseHelperCompany = new DatabaseHelperCompany(getActivity());
@@ -61,6 +65,9 @@ public class ServiceTypesFragment extends Fragment {
 
         translate = AnimationUtils.loadAnimation(getActivity(), R.anim.translate);
         translateback = AnimationUtils.loadAnimation(getActivity(), R.anim.translateback);
+
+        displaylist.setLayoutManager(new LinearLayoutManager(getActivity()));
+        displaylist.setItemAnimator(new DefaultItemAnimator());
 
         /*view.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -98,7 +105,7 @@ public class ServiceTypesFragment extends Fragment {
                             searchbar.setVisibility(View.VISIBLE);
                             searchbar.requestFocus();
                             searchbar.setMaxLines(1);
-                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                             inputMethodManager.showSoftInput(searchbar, InputMethodManager.SHOW_IMPLICIT);
                             check = 1;
 
@@ -120,7 +127,7 @@ public class ServiceTypesFragment extends Fragment {
                                     case KeyEvent.KEYCODE_DPAD_CENTER:
                                     case KeyEvent.KEYCODE_ENTER:
                                         list = databaseHelperCompany.getOverallSearch(searchbar.getText().toString());
-                                        listView.setAdapter(new CompanyListAdapter(getActivity(), list));
+                                        displaylist.setAdapter(new CompanyListViewRecycler(getActivity(), list));
                                         forsearch = 1;
                                         Log.i("enter","Inside Enter");
                                         return true;
@@ -147,7 +154,7 @@ public class ServiceTypesFragment extends Fragment {
                             search.setLayoutParams(oldparams);
                             drawer.setVisibility(View.VISIBLE);
                             title.setVisibility(View.VISIBLE);
-                            listView.setAdapter(new CategoriesAdapter(getActivity(), databaseHelperCompany.getServiceTypes()));
+                            displaylist.setAdapter(new CategoriesAdapter(getActivity(), databaseHelperCompany.getServiceTypes()));
                             //search.setEnabled(true);
                         }
 
@@ -169,7 +176,7 @@ public class ServiceTypesFragment extends Fragment {
         });
 
         if(forsearch==0)
-            listView.setAdapter(new CategoriesAdapter(getActivity(), databaseHelperCompany.getServiceTypes()));
+            displaylist.setAdapter(new CategoriesAdapter(getActivity(), databaseHelperCompany.getServiceTypes()));
 
         return view;
     }

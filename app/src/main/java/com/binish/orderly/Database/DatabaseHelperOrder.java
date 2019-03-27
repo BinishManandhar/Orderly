@@ -258,8 +258,8 @@ public class DatabaseHelperOrder extends SQLiteOpenHelper {
         return list;
     }
 
-    public OrderInfo getOrderDetail(int companyid) {
-        String sql = "Select * from ordertable where companyid='" + companyid + "'";
+    public OrderInfo getOrderDetail(int orderid) {
+        String sql = "Select * from ordertable where orderid='" + orderid + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         OrderInfo info = new OrderInfo();
         while (c.moveToNext()) {

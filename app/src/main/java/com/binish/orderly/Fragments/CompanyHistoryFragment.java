@@ -1,5 +1,6 @@
 package com.binish.orderly.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,7 +40,7 @@ public class CompanyHistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.company_history, null);
+        View view = inflater.inflate(R.layout.company_history, container,false);
         tag = view.findViewById(R.id.tag);
         search = view.findViewById(R.id.search);
         drawer2 = view.findViewById(R.id.drawer);
@@ -77,7 +78,7 @@ public class CompanyHistoryFragment extends Fragment {
                             search.setImageResource(R.drawable.ic_arrow_back_white_24dp);
                             searchbar.setVisibility(View.VISIBLE);
                             searchbar.requestFocus();
-                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                             inputMethodManager.showSoftInput(searchbar, InputMethodManager.SHOW_IMPLICIT);
                             check = 1;
                         }
@@ -129,7 +130,7 @@ public class CompanyHistoryFragment extends Fragment {
 
         displaylist.setLayoutManager(new LinearLayoutManager(getActivity()));
         displaylist.setItemAnimator(new DefaultItemAnimator());
-        displaylist.setAdapter(new CompanyHistoryRecyclerAdapter(getActivity(),databaseHelperOrder.getfinishedOrder(emailid)));
+        displaylist.setAdapter(new CompanyHistoryRecyclerAdapter(getActivity(),databaseHelperOrder.getfinishedOrder(emailid),emailid));
 
         return view;
     }

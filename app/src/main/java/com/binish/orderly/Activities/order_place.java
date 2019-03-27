@@ -1,4 +1,4 @@
-package com.binish.orderly;
+package com.binish.orderly.Activities;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.binish.orderly.R;
 
 import java.sql.Time;
 import java.text.Format;

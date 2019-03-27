@@ -173,23 +173,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/remindbeforeLinear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_margin="10dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="Remind Before: "
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_weight="5"/>
 
                 <Spinner
                     android:id="@+id/profileremindbefore"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/background">
-                </Spinner>
+                    android:layout_weight="4"
+                    android:backgroundTint="@color/background"/>
             </LinearLayout>
 
             <LinearLayout
