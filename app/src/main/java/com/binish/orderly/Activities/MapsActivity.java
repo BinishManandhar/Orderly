@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.binish.orderly.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
 
         if ((getIntent().getDoubleExtra("locationLat", 0)) != 0
                 && (getIntent().getDoubleExtra("locationLon", 0)) != 0
